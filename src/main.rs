@@ -1,6 +1,6 @@
 use anyhow::Result;
 use clap::{Parser, Subcommand};
-use std::{fs, path::PathBuf};
+use std::{env, fs, path::PathBuf};
 
 #[derive(clap::ValueEnum, Clone, Debug)]
 enum Tools {
@@ -24,12 +24,22 @@ enum Commands {
         /// The task to run (e.g. dev, build, run)    
         task: Option<String>,
 
+        /// Which folder to scan, defaults to CWD
+        #[arg(
+            long, short,
+            default_value_os_t = get_default_dir(), 
+        )]
         #[arg(long, short)]
         dir: PathBuf,
 
+        /// Explicitly override the tool instead of inferring it from $dir
         #[arg(short, long)]
         tool: Option<Tools>,
     },
+}
+
+fn get_default_dir() -> PathBuf {
+    return env::current_dir().expect("could not read file");
 }
 
 fn match_file_to_tool(file_name: &str) -> Option<Tools> {
