@@ -27,7 +27,7 @@ enum Commands {
         /// Which folder to scan, defaults to CWD
         #[arg(
             long, short,
-            default_value_os_t = get_default_dir(), 
+            default_value_os_t = get_default_dir()
         )]
         #[arg(long, short)]
         dir: PathBuf,
@@ -35,6 +35,9 @@ enum Commands {
         /// Explicitly override the tool instead of inferring it from $dir
         #[arg(short, long)]
         tool: Option<Tools>,
+
+        #[arg(trailing_var_arg = true, allow_hyphen_values = true, hide = true)]
+        var_args: Vec<String>,
     },
 }
 
@@ -74,7 +77,14 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let cli = Cli::parse();
 
     match &cli.command {
-        Some(Commands::Run { task, dir, .. }) => {
+        Some(Commands::Run {
+            task,
+            dir,
+            var_args,
+            ..
+        }) => {
+            println!("args: {:?}", var_args);
+
             let tools = scan_for_tools(dir);
             println!(
                 "'run-it run' was used, task is: {:?}, tools are {:?}",
