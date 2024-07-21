@@ -1,8 +1,8 @@
 use anyhow::Result;
 use clap::{Parser, Subcommand};
-use std::{env, fs, path::PathBuf};
+use std::{collections::HashSet, env, fs, path::PathBuf};
 
-#[derive(clap::ValueEnum, Clone, Debug)]
+#[derive(clap::ValueEnum, Eq, PartialEq, Hash, Clone, Debug)]
 enum Tools {
     Npm,
     Pnpm,
@@ -59,7 +59,6 @@ fn match_file_to_tool(file_name: &str) -> Option<Tools> {
 
 fn scan_for_tools(dir: &PathBuf) -> Vec<Tools> {
     fs::read_dir(dir)
-        .ok()
         .into_iter()
         .flat_map(|entries| entries.filter_map(|entry| entry.ok()))
         .filter_map(|entry| {
@@ -70,7 +69,10 @@ fn scan_for_tools(dir: &PathBuf) -> Vec<Tools> {
             })
         })
         .flatten()
-        .collect()
+        .into_iter()
+        .collect::<HashSet<Tools>>()
+        .into_iter()
+        .collect::<Vec<Tools>>()
 }
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
