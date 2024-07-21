@@ -39,7 +39,7 @@ enum Commands {
 }
 
 fn get_default_dir() -> PathBuf {
-    return env::current_dir().expect("could not read file");
+    return env::current_dir().expect("could not infer CWD");
 }
 
 fn match_file_to_tool(file_name: &str) -> Option<Tools> {
