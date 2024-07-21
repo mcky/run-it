@@ -22,7 +22,7 @@ enum Commands {
     /// run the script named <task>
     Run {
         /// The task to run (e.g. dev, build, run)    
-        task: Option<String>,
+        task: String,
 
         /// Which folder to scan, defaults to CWD
         #[arg(
