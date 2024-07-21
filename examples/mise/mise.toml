@@ -1,0 +1,10 @@
+[tasks.test]
+description = 'Run automated tests'
+run = [
+    'cargo test',
+]
+
+[tasks.build]
+run = [
+    'cargo build',
+]
