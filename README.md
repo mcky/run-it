@@ -1,6 +1,6 @@
 <div align=right>Table of Contents↗️</div>
 
-<h1 align=center><code>just</code></h1>
+<h1 align=center><code>run-it</code></h1>
 
 <!-- <div align=center>
   <a href=https://crates.io/crates/PKG>
@@ -45,3 +45,14 @@ running: make test
 running 1 test
 test tools::tests::all_tools_are_matched ... ok
 ```
+
+## Features
+- [ ] Run commands
+- [ ] List available tasks
+- [ ] Aliases for common tasks
+- [ ] Package installation
+- [ ] Overrides via a config file
+- Support for:
+  - [ ] Elixir mix
+  - [ ] Turborepo
+  

@@ -8,6 +8,8 @@ pub enum Tools {
     Make,
     Mise,
     Just,
+    TurboRepo,
+    Mix,
 }
 
 pub fn match_file_to_tool(file_name: &str) -> Option<Tools> {
@@ -19,6 +21,8 @@ pub fn match_file_to_tool(file_name: &str) -> Option<Tools> {
         "package-lock.json" => Some(Tools::Npm),
         "package.json" => Some(Tools::Npm),
         "justfile" => Some(Tools::Just),
+        "turbo.json" => Some(Tools::TurboRepo),
+        "mix.exs" => Some(Tools::Mix),
         _ => None,
     }
 }
@@ -40,6 +44,8 @@ mod tests {
                 Tools::Npm => "package-lock.json",
                 Tools::Mise => "mise.toml",
                 Tools::Just => "justfile",
+                Tools::TurboRepo => "turbo.json",
+                Tools::Mix => "mix.exs",
             };
 
             let matched = match_file_to_tool(file_name);

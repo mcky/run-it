@@ -52,6 +52,8 @@ fn build_run_cmd(tool: Tools, task: String, var_args: String) -> String {
         Tools::Yarn => format!("yarn run {task} {var_args}"),
         Tools::Mise => format!("mise run {task} {var_args}"),
         Tools::Just => format!("just {task} {var_args}"),
+        Tools::TurboRepo => todo!("turbo not implemented"),
+        Tools::Mix => todo!("mix not implemented"),
     };
 }
 
