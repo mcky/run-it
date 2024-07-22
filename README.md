@@ -47,7 +47,7 @@ test tools::tests::all_tools_are_matched ... ok
 ```
 
 ## Features
-- [ ] Run commands
+- [x] Run tasks
 - [ ] List available tasks
 - [ ] Aliases for common tasks
 - [ ] Package installation
@@ -55,4 +55,3 @@ test tools::tests::all_tools_are_matched ... ok
 - Support for:
   - [ ] Elixir mix
   - [ ] Turborepo
-  
