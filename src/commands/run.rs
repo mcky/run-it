@@ -33,7 +33,7 @@ pub fn exec(task: &String, dir: &PathBuf, var_args: &Vec<String>) {
 
     match &tools[..] {
         [tool] => {
-            run_task_for_tool(tool.clone(), task.clone(), var_args_str);
+            run_task_for_tool(tool.clone(), task.clone(), var_args_str, dir);
         }
         [] => {
             todo!("No tool provided")
@@ -55,14 +55,14 @@ fn build_run_cmd(tool: Tools, task: String, var_args: String) -> String {
     };
 }
 
-fn run_task_for_tool(tool: Tools, task: String, var_args: String) {
+fn run_task_for_tool(tool: Tools, task: String, var_args: String, dir: &PathBuf) {
     let cmd = build_run_cmd(tool, task, var_args);
 
     println!("running: {cmd}");
 
     let result = std::process::Command::new("sh")
         .arg("-c")
-        .current_dir("./examples/make")
+        .current_dir(dir)
         .arg(cmd)
         .output()
         .expect("failed to execute process");
