@@ -7,6 +7,7 @@ pub enum Tools {
     Yarn,
     Make,
     Mise,
+    Just,
 }
 
 pub fn match_file_to_tool(file_name: &str) -> Option<Tools> {
@@ -17,6 +18,7 @@ pub fn match_file_to_tool(file_name: &str) -> Option<Tools> {
         "mise.toml" => Some(Tools::Mise),
         "package-lock.json" => Some(Tools::Npm),
         "package.json" => Some(Tools::Npm),
+        "justfile" => Some(Tools::Just),
         _ => None,
     }
 }
@@ -37,6 +39,7 @@ mod tests {
                 Tools::Yarn => "yarn.lock",
                 Tools::Npm => "package-lock.json",
                 Tools::Mise => "mise.toml",
+                Tools::Just => "justfile",
             };
 
             let matched = match_file_to_tool(file_name);

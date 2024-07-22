@@ -50,7 +50,8 @@ fn build_run_cmd(tool: Tools, task: String, var_args: String) -> String {
         Tools::Npm => format!("npm run {task} {var_args}"),
         Tools::Pnpm => format!("pnpm run {task} {var_args}"),
         Tools::Yarn => format!("yarn run {task} {var_args}"),
-        Tools::Mise => format!("mise run {task} {var_args}")
+        Tools::Mise => format!("mise run {task} {var_args}"),
+        Tools::Just => format!("just {task} {var_args}"),
     };
 }
 

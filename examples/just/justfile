@@ -1,0 +1,5 @@
+build:
+  echo "building with just"
+
+test TEST: build
+  "testing with just"
