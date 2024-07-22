@@ -22,25 +22,7 @@ struct Cli {
 #[derive(Subcommand)]
 enum Commands {
     /// run the script named <task>
-    Run {
-        /// The task to run (e.g. dev, build, run)    
-        task: String,
-
-        /// Which folder to scan, defaults to CWD
-        #[arg(
-            long, short,
-            default_value_os_t = get_default_dir()
-        )]
-        #[arg(long, short)]
-        dir: PathBuf,
-
-        /// Explicitly override the tool instead of inferring it from $dir
-        #[arg(short, long)]
-        tool: Option<Tools>,
-
-        #[arg(trailing_var_arg = true, allow_hyphen_values = true, hide = true)]
-        var_args: Vec<String>,
-    },
+    Run(commands::run::Run),
 }
 
 fn get_default_dir() -> PathBuf {
@@ -81,12 +63,12 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let cli = Cli::parse();
 
     match &cli.command {
-        Some(Commands::Run {
+        Some(Commands::Run(commands::run::Run {
             task,
             dir,
             var_args,
             ..
-        }) => commands::run::exec(task, dir, var_args),
+        })) => commands::run::exec(task, dir, var_args),
         None => {
             todo!("Needs a sub-command");
         }

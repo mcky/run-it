@@ -1,6 +1,27 @@
+use crate::{get_default_dir, scan_for_tools, Tools};
+use clap::Args;
 use std::path::PathBuf;
 
-use crate::{scan_for_tools, Tools};
+#[derive(Args)]
+pub(crate) struct Run {
+    /// The task to run (e.g. dev, build, run)    
+    pub(crate) task: String,
+
+    /// Which folder to scan, defaults to CWD
+    #[arg(
+        long, short,
+        default_value_os_t = get_default_dir()
+    )]
+    #[arg(long, short)]
+    pub(crate) dir: PathBuf,
+
+    /// Explicitly override the tool instead of inferring it from $dir
+    #[arg(short, long)]
+    pub(crate) tool: Option<Tools>,
+
+    #[arg(trailing_var_arg = true, allow_hyphen_values = true, hide = true)]
+    pub(crate) var_args: Vec<String>,
+}
 
 pub fn exec(task: &String, dir: &PathBuf, var_args: &Vec<String>) {
     let tools = scan_for_tools(dir);
