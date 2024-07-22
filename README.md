@@ -48,6 +48,14 @@ running 1 test
 test tools::tests::all_tools_are_matched ... ok
 ```
 
+Args can be passed to the underlying script 
+```sh
+# run the `test` task, reading the available scripts from the given --dir
+$ run-it run test --dir ./packages/sub-package
+# pass --watch to the `test` task
+$ run-it run test --dir ./packages/sub-package -- --watch
+```
+
 ## Features
 - [x] Run tasks
 - [ ] List available tasks
