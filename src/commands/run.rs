@@ -1,4 +1,4 @@
-use crate::{get_default_dir, scan_for_tools, Tools};
+use crate::{get_default_dir, scan_for_tools, tools::Tools};
 use clap::Args;
 use std::path::PathBuf;
 
