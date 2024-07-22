@@ -2,6 +2,8 @@
 
 <h1 align=center><code>run-it</code></h1>
 
+<p align=center>⚠️ This project is WIP ⚠️</p>
+
 <!-- <div align=center>
   <a href=https://crates.io/crates/PKG>
     <img src=https://img.shields.io/crates/v/PKG.svg alt="crates.io version">
